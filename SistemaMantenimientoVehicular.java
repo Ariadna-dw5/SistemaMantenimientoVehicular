@@ -77,7 +77,12 @@ public class SistemaMantenimientoVehicular {
             double limiteMaxAceite = 6000;
             double limiteMaxFiltros = 12000;
             double limiteMaxFrenos = 22000;
+            // Para poder calcular la diferencia de kilometraje desde la ultima vez que se lo realizo 
+            double recorridoAceite = kmActual - kmUltimoAceite;
+            double recorridoFiltros = kmActual - kmUltimoFiltros;
+            double recorridoFrenos = kmActual - kmUltimoFrenos;
      
+            
             // Para el menu se usara ciclo do - while 
             do {
             System.out.println("\n------------ DriveEngine ------------ "); // Nombre de la empresa (para darle realismo)
@@ -124,7 +129,13 @@ public class SistemaMantenimientoVehicular {
                     }
                   break;
                   
-                  // Tarea 3 - Saber cuando se necesita mantenimiento ============================================
+                  /* Tarea 3 ==============================================================================================
+                  Saber cuando se necesita mantenimiento, aqui se compararan con los kilometros recorridos por el usuario 
+                  con la cantidad de kilometros en la que se recomienda ya hacer mantenimientos o cambios de aceite al vehiculo. 
+                  Se indica si el estado es optimo 
+                  Se indica si se recomienda o es necesario realizar un servicio de mantenimiento 
+                  Se indicara una alerta en caso de que el servicio sea urgente 
+                  */
                 case 3:
                   System.out.println(" ===== Seccion de evaluacion de mantenimiento =====");
              
@@ -132,9 +143,6 @@ public class SistemaMantenimientoVehicular {
                       System.out.println("Atencion: Primero debe registrar los kilometrajes en la opcion 1 del menu principal !!!!");
                   
                   } else { 
-                        double recorridoAceite = kmActual - kmUltimoAceite;
-                        double recorridoFiltros = kmActual - kmUltimoFiltros;
-                        double recorridoFrenos = kmActual - kmUltimoFrenos;
 
                         System.out.println("Kilometros recorridos desde el ultimo servicio que realizo:");
                         System.out.println("- Aceite: " + recorridoAceite + " km");
@@ -142,36 +150,58 @@ public class SistemaMantenimientoVehicular {
                         System.out.println("- Frenos: " + recorridoFrenos + " km");
                         System.out.println("------------------------------------------------");
                       
+                        //****************************************************************************************************************************
                         System.out.println(" === Estado del aceite === ");
                         System.out.println("A continuacion se evaluara el estado del aceite de el vehiculo y que tan urgente requiere un servicio de cambio.\n");
                         
                         if (recorridoAceite > limiteMaxAceite) {
                             System.out.println("ALERTA: El cambio de aceite esta ATRASADO por " 
                                     + (recorridoAceite - limiteMaxAceite) + " km excedidos sobre el limite maximo.");
-                        }
+                        } // Fin del if 
                         else if (recorridoAceite >= limiteAceite) {
                             System.out.println("RECOMENDACION: Se requiere realizar cambio preventivo de aceite.");
                         } else {
                             System.out.println("ESTADO OPTIMO: El servicio de aceite esta al dia.");
-                        }
-                        
-                        
+                        }    // Fin del else del else-if 
                       
                   }
-                  
-                  
-             
+                  //*************************************************************************************************************************************
+                    System.out.println("\n === Estado de filtros === ");
+                    if (recorridoFiltros > limiteMaxFiltros) {
+                            System.out.println("ALERTA: El cambio de filtros esta ATRASADO por " 
+                                    + (recorridoFiltros - limiteMaxFiltros) + " km excedidos sobre el limite maximo.");
+                        } // Fin del if 
+                    else if (recorridoFiltros >= limiteFiltros) {
+                            System.out.println("RECOMENDACION: Se requiere realizar cambio preventivo a sus filtros.");
+                        } else {
+                            System.out.println("ESTADO OPTIMO: Los filtros estan en buen estado.");
+                        } // Fin del else del else-if 
+           
+                  //****************************************************************************************************************************************  
+                    System.out.println("\n === Estado del aceite de frenos ===");
+                    if (recorridoFrenos > limiteMaxFrenos) {
+                            System.out.println("ALERTA: La revision de frenos esta ATRASADA por " 
+                                    + (recorridoFrenos - limiteMaxFrenos) + " km excedidos sobre el limite maximo.");     
+                        } // Fin del if 
+                    else if (recorridoAceite >= limiteAceite) {
+                            System.out.println("RECOMENDACION: Se requiere realizar un cambio preventivo de aceite.");
+                        } else {
+                            System.out.println("ESTADO OPTIMO: El servicio de aceite esta al dia y en optimas condiciones.");
+                        } // Fin del else de else-if 
+                    
+                  // ****************************************************************************************************************************************   
                   break;
                   
+                  
                 case 4:
-                  System.out.println(" ===== Sección de salida ===== ");
+                  System.out.println(" ===== Salida ===== ");
                   break;  
                   
                   default:
-                    System.out.println("Opcion incorrecta. Por favor ingrese un numero entre 1 y 4, para ingresar a una de las opciones.");
+                    System.out.println("Opcion incorrecta. Por favor ingrese un numero entre 1 y 4, para ingresar a una de las opciones que le ofrecemos en nuestro menú.");
                     break;
                       
-            }
+            } // fin del switch que encapsula la tarea 1, 2, 3 y 4, que permite al usuario ingresar a cada opción del menú general y seleccionar esas opciones.
             
         } while (opcionMenu != 4); // Se mantendra hasta que el usuario presione salir 
         
