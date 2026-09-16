@@ -7,7 +7,7 @@ package sistemamantenimientovehicular;
 import java.util.Scanner;
 
 /**
- * @author Ariadna Rodríguez y Juan Calderon
+ * @author Ariadna Rodríguez 
  *  Proyecto final de clase de programación I Q3
  * 
  * ====== Presentamos lo que es un sistema de mantenimiento vehicular preventivo ======
@@ -59,15 +59,27 @@ public class SistemaMantenimientoVehicular {
      // Tarea 1 - implementar el menu de opciones para el usuario =======================================================
         
         int opcionMenu = 0; 
-          // Declaración de variables CASE1
+          // Declaración de variables CASE1 y CASE2
          double kmActual = 0;
             double kmUltimoAceite = 0;
             double kmUltimoFiltros = 0;
             double kmUltimoFrenos = 0; 
             boolean datosRegistrados = false; 
             
-        // Para el menu se usara ciclo do - while 
-        do {
+            // Declaración de variables CASE3
+            // Limite preventivo que se recomienda 
+            double limiteAceite = 5000;
+            double limiteFiltros = 10000;
+            double limiteFrenos = 20000;
+            
+            //Declaración de variables CASE3 y CASE4
+            // Limite máximo antes de considerar un servicio atrasado 
+            double limiteMaxAceite = 6000;
+            double limiteMaxFiltros = 12000;
+            double limiteMaxFrenos = 22000;
+     
+            // Para el menu se usara ciclo do - while 
+            do {
             System.out.println("\n------------ DriveEngine ------------ "); // Nombre de la empresa (para darle realismo)
             System.out.println(" \n ===== MENU DE GESTION VEHICULAR ======"); // menu principal 
             
@@ -112,8 +124,43 @@ public class SistemaMantenimientoVehicular {
                     }
                   break;
                   
+                  // Tarea 3 - Saber cuando se necesita mantenimiento ============================================
                 case 3:
-                  System.out.println(" ===== Sección de evaluación de mantenimiento =====");
+                  System.out.println(" ===== Seccion de evaluacion de mantenimiento =====");
+             
+                  if (!datosRegistrados) {
+                      System.out.println("Atencion: Primero debe registrar los kilometrajes en la opcion 1 del menu principal !!!!");
+                  
+                  } else { 
+                        double recorridoAceite = kmActual - kmUltimoAceite;
+                        double recorridoFiltros = kmActual - kmUltimoFiltros;
+                        double recorridoFrenos = kmActual - kmUltimoFrenos;
+
+                        System.out.println("Kilometros recorridos desde el ultimo servicio que realizo:");
+                        System.out.println("- Aceite: " + recorridoAceite + " km");
+                        System.out.println("- Filtros: " + recorridoFiltros + " km");
+                        System.out.println("- Frenos: " + recorridoFrenos + " km");
+                        System.out.println("------------------------------------------------");
+                      
+                        System.out.println(" === Estado del aceite === ");
+                        System.out.println("A continuacion se evaluara el estado del aceite de el vehiculo y que tan urgente requiere un servicio de cambio.\n");
+                        
+                        if (recorridoAceite > limiteMaxAceite) {
+                            System.out.println("ALERTA: El cambio de aceite esta ATRASADO por " 
+                                    + (recorridoAceite - limiteMaxAceite) + " km excedidos sobre el limite maximo.");
+                        }
+                        else if (recorridoAceite >= limiteAceite) {
+                            System.out.println("RECOMENDACION: Se requiere realizar cambio preventivo de aceite.");
+                        } else {
+                            System.out.println("ESTADO OPTIMO: El servicio de aceite esta al dia.");
+                        }
+                        
+                        
+                      
+                  }
+                  
+                  
+             
                   break;
                   
                 case 4:
