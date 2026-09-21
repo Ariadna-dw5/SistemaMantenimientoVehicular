@@ -93,7 +93,7 @@ public class SistemaMantenimientoVehicular {
             System.out.println("\n------------ DriveEngine ------------ "); // Nombre de la empresa (para darle realismo)
             System.out.println(" \n ===== MENU DE GESTION VEHICULAR ======"); // menu principal 
             
-            System.out.println("Selecciona una opcion (1-8) para poder ayudarte o seleccione la opcion 9 para salir:");
+            System.out.println("Selecciona una opcion (1-7) para poder ayudarte o seleccione la opcion 8 para salir:");
             System.out.println("1. Registrar kilometrajes.");
             System.out.println("2. Consultar kilometrajes.");
             System.out.println("3. Evaluar si mi vehiculo necesita mantenimiento.");
@@ -101,8 +101,7 @@ public class SistemaMantenimientoVehicular {
             System.out.println("5. Catalogo de recomendaciones.");
             System.out.println("6. Cotice sus costos de mantenimientos.");
             System.out.println("7. Diagnostico general del vehiculo.");
-            System.out.println("8. Generar ficha de servicio.");
-            System.out.println("9. Salir.");
+            System.out.println("8. Salir.");
             
             opcionMenu = input.nextInt (); 
             
@@ -378,7 +377,7 @@ public class SistemaMantenimientoVehicular {
                         System.out.println("Servicios con mantenimiento atrasado: " + serviciosAtrasados + " de 3");
                         System.out.print("ESTADO GENERAL DEL VEHICULO: ");
 
-                        // las selecciones van a ser para clasificar el estado de salud
+                        // las selecciones van a ser para clasificar el estado del vehiculo
                         if (serviciosAtrasados == 0) {
                             System.out.println(" -> [AL DIA]: Todos los servicios principales se encuentran dentro de los limites.");
                         }
@@ -395,16 +394,9 @@ public class SistemaMantenimientoVehicular {
                     }
                     break;
 
-                 
-                 // ===================================================================================================================================
-                   case 8:
-                       generarFichaServicio(datosRegistrados, km);
-                    break;
-                    
                 // ===============================================================================================================================
                    
-                   
-                   case 9:
+                   case 8:
                   System.out.println(" ===== Salida ===== ");
                     System.out.println(" Gracias por usar el sistema DriveEngine, te esperamos pronto nuevamente, ten buen dia estimado !!!!!");
                   break;  
@@ -419,36 +411,5 @@ public class SistemaMantenimientoVehicular {
         
     } // Fin del main 
     
-    public static void generarFichaServicio(boolean registrado, double[] km) {
-        System.out.println("\n ===== GENERADOR DE FICHA DE SERVICIO DIGITAL =====");
-
-        if (!registrado) {
-            System.out.println("Atencion: Primero debe registrar los kilometrajes en la opcion 1 del menu principal !!!!");
-        } else {
-            // Generación de un número de folio aleatorio entre 1000 y 9999 usando Math.random()
-            int folio = (int) (Math.random() * 9000) + 1000;
-
-            System.out.println("+------------------------------------------------------------------+");
-            System.out.println("|                     COMPROBANTE DRIVEENGINE                      |");
-            System.out.println("|                FICHA TECNICA DE CONTROL VEHICULAR                |");
-            System.out.println("+------------------------------------------------------------------+");
-            System.out.println("  Folio de Servicio: #DE-" + folio);
-            System.out.println("  Estado del Registro: ACTIVO Y COMPLETO");
-            System.out.println("--------------------------------------------------------------------");
-            System.out.println("  DATOS DE KILOMETRAJE REGISTRADOS:");
-            System.out.println("   * Kilometraje Actual:          " + km[0] + " km");
-            System.out.println("   * Ultimo Cambio de Aceite:     " + km[1] + " km");
-            System.out.println("   * Ultimo Cambio de Filtros:    " + km[2] + " km");
-            System.out.println("   * Ultima Revision de Frenos:   " + km[3] + " km");
-            System.out.println("--------------------------------------------------------------------");
-            System.out.println("  RECORRIDOS ACUMULADOS:");
-            System.out.println("   * Recorrido Aceite:  " + (km[0] - km[1]) + " km (Limite: 5000 km)");
-            System.out.println("   * Recorrido Filtros: " + (km[0] - km[2]) + " km (Limite: 10000 km)");
-            System.out.println("   * Recorrido Frenos:  " + (km[0] - km[3]) + " km (Limite: 20000 km)");
-            System.out.println("---------------------------------------------------------------------------------------");
-            System.out.println("|      Documento generado automaticamente por el sistema.          |");
-            System.out.println("-----------------------------------------------------------------------------------------");
-        }
-    } // Fin de la función generarFichaServicio
-    
+  
 } // Fin de Class 
